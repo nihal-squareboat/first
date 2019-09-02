@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Company;
+use App\UserCompany;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -63,11 +66,49 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'usertype' => $data['usertype'],
+            'usertype' => $data['userType'],
+            
         ]);
+        if($data['jobId']!='-1') {
+            $company = Company::findOrFail($data['jobId']);
+        
+            $usercompany = UserCompany::create([
+            'user_id' => $user->id,
+            'company_id' => $company->id,
+            ]);
+        }
+
+        return $user;
+    }
+
+    public function company(Request $request)
+    {
+        $company = new Company;
+        if($request->hiddenValue == 'other') {
+
+            $validator = Validator::make($request->all(), [
+                'companyName' => 'required|max:255',
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $company->companyName = $request->companyName;
+            $company->save();
+            return redirect('register')->with('recruiter', $company->id);
+        }
+        else {
+            return redirect('register')->with('recruiter', $request->companyId);
+        }
+
+        
     }
 }

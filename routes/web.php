@@ -23,3 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/home','JobController@store')->name('job');
+
+Route::post('/company','Auth\RegisterController@company')->name('comapnies.add');
+
+Route::post('/job/{id}','JobController@update')->name('jobs.update');
+
+Route::post('/deletejob/{id}','JobController@destroy')->name('jobs.delete');

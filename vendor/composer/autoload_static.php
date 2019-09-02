@@ -33,6 +33,8 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
+        '34122c0574b76bf21c9a8db62b5b9cf3' => __DIR__ . '/..' . '/cakephp/chronos/src/carbon_compat.php',
+        'ed33d19cba977f2a7e321f120d94a872' => __DIR__ . '/..' . '/spatie/once/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -81,6 +83,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Once\\' => 12,
         ),
         'R' => 
         array (
@@ -107,6 +110,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         ),
         'M' => 
         array (
+            'Moontoast\\Math\\' => 15,
             'Monolog\\' => 8,
         ),
         'L' => 
@@ -160,6 +164,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'C' => 
         array (
             'Cron\\' => 5,
+            'Cake\\Chronos\\' => 13,
         ),
         'B' => 
         array (
@@ -286,6 +291,10 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Spatie\\Once\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/once/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -330,6 +339,10 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'Nexmo\\' => 
         array (
             0 => __DIR__ . '/..' . '/nexmo/client/src',
+        ),
+        'Moontoast\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math',
         ),
         'Monolog\\' => 
         array (
@@ -436,6 +449,10 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
+        'Cake\\Chronos\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/chronos/src',
+        ),
         'BeyondCode\\DumpServer\\' => 
         array (
             0 => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src',
@@ -475,6 +492,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
     );
 
     public static $classMap = array (
+        'App\\Company' => __DIR__ . '/../..' . '/app/Company.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -484,6 +502,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\JobController' => __DIR__ . '/../..' . '/app/Http/Controllers/JobController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -492,16 +511,37 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Job' => __DIR__ . '/../..' . '/app/Job.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\Usercompany' => __DIR__ . '/../..' . '/app/UserCompany.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
         'BeyondCode\\DumpServer\\RequestContextProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/RequestContextProvider.php',
+        'Cake\\Chronos\\Chronos' => __DIR__ . '/..' . '/cakephp/chronos/src/Chronos.php',
+        'Cake\\Chronos\\ChronosInterface' => __DIR__ . '/..' . '/cakephp/chronos/src/ChronosInterface.php',
+        'Cake\\Chronos\\ChronosInterval' => __DIR__ . '/..' . '/cakephp/chronos/src/ChronosInterval.php',
+        'Cake\\Chronos\\Date' => __DIR__ . '/..' . '/cakephp/chronos/src/Date.php',
+        'Cake\\Chronos\\DifferenceFormatter' => __DIR__ . '/..' . '/cakephp/chronos/src/DifferenceFormatter.php',
+        'Cake\\Chronos\\MutableDate' => __DIR__ . '/..' . '/cakephp/chronos/src/MutableDate.php',
+        'Cake\\Chronos\\MutableDateTime' => __DIR__ . '/..' . '/cakephp/chronos/src/MutableDateTime.php',
+        'Cake\\Chronos\\Traits\\ComparisonTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/ComparisonTrait.php',
+        'Cake\\Chronos\\Traits\\CopyTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/CopyTrait.php',
+        'Cake\\Chronos\\Traits\\DifferenceTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/DifferenceTrait.php',
+        'Cake\\Chronos\\Traits\\FactoryTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/FactoryTrait.php',
+        'Cake\\Chronos\\Traits\\FormattingTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/FormattingTrait.php',
+        'Cake\\Chronos\\Traits\\FrozenTimeTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/FrozenTimeTrait.php',
+        'Cake\\Chronos\\Traits\\MagicPropertyTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/MagicPropertyTrait.php',
+        'Cake\\Chronos\\Traits\\ModifierTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/ModifierTrait.php',
+        'Cake\\Chronos\\Traits\\RelativeKeywordTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/RelativeKeywordTrait.php',
+        'Cake\\Chronos\\Traits\\TestingAidTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/TestingAidTrait.php',
+        'Cake\\Chronos\\Traits\\TimezoneTrait' => __DIR__ . '/..' . '/cakephp/chronos/src/Traits/TimezoneTrait.php',
+        'Cake\\Chronos\\Translator' => __DIR__ . '/..' . '/cakephp/chronos/src/Translator.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\CarbonPeriod' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',
@@ -2574,6 +2614,8 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'Monolog\\ResettableInterface' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ResettableInterface.php',
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'Moontoast\\Math\\BigNumber' => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math/BigNumber.php',
+        'Moontoast\\Math\\Exception\\ArithmeticException' => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math/Exception/ArithmeticException.php',
         'Nexmo\\Account\\Balance' => __DIR__ . '/..' . '/nexmo/client/src/Account/Balance.php',
         'Nexmo\\Account\\Client' => __DIR__ . '/..' . '/nexmo/client/src/Account/Client.php',
         'Nexmo\\Account\\Config' => __DIR__ . '/..' . '/nexmo/client/src/Account/Config.php',
@@ -3790,6 +3832,8 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'SebastianBergmann\\Timer\\RuntimeException' => __DIR__ . '/..' . '/phpunit/php-timer/src/RuntimeException.php',
         'SebastianBergmann\\Timer\\Timer' => __DIR__ . '/..' . '/phpunit/php-timer/src/Timer.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\Once\\Backtrace' => __DIR__ . '/..' . '/spatie/once/src/Backtrace.php',
+        'Spatie\\Once\\MemoizeAwareTrait' => __DIR__ . '/..' . '/spatie/once/src/MemoizeAwareTrait.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',

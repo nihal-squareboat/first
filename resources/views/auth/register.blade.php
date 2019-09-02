@@ -8,9 +8,9 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -61,20 +61,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="usertype" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+                        <input type="hidden" id="jobId" name="jobId">
 
-                            <div class="col-md-6 form-check-inline">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="radio" name="usertype" id="student" value="student" required>
-                                    <label class="form-check-label" for="student">Student</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="usertype" id="recruiter" value="recruiter">
-                                    <label class="form-check-label" for="recruiter">Recruiter</label>
-                                  </div>
-                            </div>
-                        </div>
+                        <input type="hidden" id="userType" name="userType">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -89,4 +78,134 @@
         </div>
     </div>
 </div>
+
+{{-- Company Name Modal Start --}}
+<div class="modal fade" id="company" role="dialog" data-backdrop="static"  data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter company name</h4>
+                </div>
+                <form method="POST" action="{{ route('comapnies.add') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <select class="form-control company" name="companyId">
+                            <option>--Select Option--</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->companyName }}</option>
+                            @endforeach
+                            <option id="other">Other</option>
+                        </select>
+                        <div id="companyForm" class="form-group" style="display:none;">
+                            <br>
+                            @csrf
+                            <label for="companyTitle">Company Name</label>
+                            <input type="text" name="companyName" id="companyName" class="form-control{{ $errors->has('companyName') ? ' is-invalid' : '' }}" id="companyName" placeholder="Enter Company Name">
+                            @if ($errors->has('companyName'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('companyName') }}</strong>
+                                </span>
+                            @endif
+                            <input type="hidden" id="hiddenValue" name="hiddenValue" >
+                        </div>
+                        <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Done</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $("select.company").change(function(){
+                var selectedCompany = $(this).children("option:selected").val();
+                if( selectedCompany == 'Other'){
+                    document.getElementById("companyForm").style.display = "block";
+                    // document.getElementById("companyName").required = true;
+                    document.getElementById("hiddenValue").value = "other";
+                } 
+                else
+                {
+                    document.getElementById("companyForm").style.display = "none";
+                    document.getElementById("companyName").required = false;
+                    document.getElementById("hiddenValue").value = "previous";
+                }
+            });
+        });
+    </script>
+    {{-- Company College Name Modal End --}}
+
+    {{-- User Type Modal Start --}}
+<div class="modal fade" id="userTy" role="dialog" data-backdrop="static"  data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select user Type</h4>
+                <a href=" {{ url('/') }} ">
+                    <button type="button" class="close">&times;</button>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card" onclick="candidate()">
+                                <img class="card-img-top" src="{{ asset('image/candidate.png') }}" alt="Card image cap">
+                            <div class="card-body" style="text-align:center;">
+                                <h5 class="card-title">Candidate</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card" onclick="recruiter()">
+                            <img class="card-img-top" src="{{ asset('image/recruiter.png') }}" alt="Card image cap">
+                            <div class="card-body" style="text-align:center;">
+                                <h5 class="card-title">Recruiter</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {{-- User Type Name Modal End --}}
+
+<script type="text/javascript">
+    document.getElementById("body").onload = function(){
+        @if(session()->has('recruiter'))
+            document.getElementById("userType").value="recruiter";
+            document.getElementById("jobId").value="{{session()->get('recruiter')}}";
+            $('#userTy').modal('hide');
+        @else
+            @if($errors->any())
+                @if ($errors->has('companyName'))
+                    $('#company').modal('show');
+                    document.getElementById("other").selected = true;
+                    document.getElementById("companyForm").style.display = "block";
+                    document.getElementById("hiddenValue").value = "other";
+                @else
+                    $('#userTy').modal('hide');
+                @endif
+            @else
+                $('#userTy').modal('show');
+            @endif
+        @endif
+        
+    };
+
+    function recruiter() {
+        $('#userTy').modal('hide');
+        $('#company').modal('show');
+    };
+
+    function candidate() {
+        $('#userTy').modal('hide');
+        document.getElementById("userType").value="candidate";
+        document.getElementById("jobId").value="-1";
+    };
+</script>
+
 @endsection

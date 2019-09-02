@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Job;
+use App\User;
+use App\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class JobController extends Controller
 {
@@ -14,6 +17,12 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
@@ -37,6 +46,17 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'jobTitle' => 'required|max:255',
+            'jobDescription' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $job = new Job;
 
         $job->jobTitle = $request->jobTitle;
@@ -44,7 +64,7 @@ class JobController extends Controller
         $job->user_id = Auth::user()->id;
         $job->save();
         Session::put('success','Added job successfully');
-        return redirect('/home');
+        return redirect('home');
     }
 
     /**
@@ -76,16 +96,26 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $job = Job::findOrFail($id);
+        $validator = Validator::make($request->all(), [
+            'jobTitle' => 'required|max:255',
+            'jobDescription' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->with('edit', $id)
+                        ->withInput();
+        }
 
         $job->jobTitle = $request->jobTitle;
         $job->jobDescription = $request->jobDescription;
 
         $job->save();
 
-        return redirect('/home');
+        return redirect('home');
     }
 
     /**
@@ -96,6 +126,9 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->delete();
+
+        return redirect('home');
     }
 }
