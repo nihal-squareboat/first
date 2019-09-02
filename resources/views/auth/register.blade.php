@@ -85,17 +85,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Enter company name</h4>
+                    <a href = "{{ route('login') }}">
+                        <button type="button" class="close">&times;</button>
+                    </a>
                 </div>
-                <form method="POST" action="{{ route('comapnies.add') }}">
+                <form method="POST" onsubmit="return validateForm()" action="{{ route('comapnies.add') }}">
                     @csrf
                     <div class="modal-body">
-                        <select class="form-control company" name="companyId">
-                            <option>--Select Option--</option>
+                        <select class="form-control company" id="companyNameForm" name="companyId">
+                            <option value="Select">--Select Company--</option>
                             @foreach ($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->companyName }}</option>
                             @endforeach
                             <option id="other">Other</option>
                         </select>
+                        <span class="invalid-feedback" id="notSelected" role="alert" style="display: none;">
+                            <strong>Select a company</strong>
+                        </span>
                         <div id="companyForm" class="form-group" style="display:none;">
                             <br>
                             @csrf
@@ -121,10 +127,12 @@
     <script>
         $(document).ready(function(){
             $("select.company").change(function(){
+                $("#companyNameForm option[value='Select']").remove();
+                document.getElementById("notSelected").style.display = "none";
                 var selectedCompany = $(this).children("option:selected").val();
                 if( selectedCompany == 'Other'){
                     document.getElementById("companyForm").style.display = "block";
-                    // document.getElementById("companyName").required = true;
+                    document.getElementById("companyName").required = true;
                     document.getElementById("hiddenValue").value = "other";
                 } 
                 else
@@ -144,7 +152,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Select user Type</h4>
-                <a href=" {{ url('/') }} ">
+                <a href=" {{ route('login') }} ">
                     <button type="button" class="close">&times;</button>
                 </a>
             </div>
@@ -195,6 +203,15 @@
         @endif
         
     };
+
+    function validateForm() {
+        var selectedCompany = $('#companyNameForm').children("option:selected").val();
+        if (selectedCompany == "Select") {
+            document.getElementById("notSelected").style.display = "block";
+            return false;
+        }
+        
+    }
 
     function recruiter() {
         $('#userTy').modal('hide');

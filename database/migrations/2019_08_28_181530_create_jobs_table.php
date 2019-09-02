@@ -15,7 +15,7 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->Integer('user_id')->unsigned();
+            $table->Integer('user_id')->unsigned()->index();
             $table->string('jobTitle');
             $table->longText('jobDescription');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
