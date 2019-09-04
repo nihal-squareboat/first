@@ -6,6 +6,7 @@ use App\Job;
 use App\User;
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,7 @@ class JobController extends Controller
         $job->user_id = Auth::user()->id;
         $job->save();
         Session::put('success','Added job successfully');
-        return redirect('home');
+        return redirect()->route('home');
     }
 
     /**
@@ -75,7 +76,14 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        $applicants = DB::table('jobapplieds')
+                ->join('users', 'users.id', '=', 'jobapplieds.candidate_id')
+                ->select('users.name', 'users.email')
+                ->where('jobapplieds.job_id', '=', $id)
+                ->orderBy('users.name', 'asc' )
+                ->orderBy('users.email', 'asc')
+                ->get();
+            return view('applicants' ,compact('applicants'));
     }
 
     /**
@@ -115,7 +123,7 @@ class JobController extends Controller
 
         $job->save();
 
-        return redirect('home');
+        return redirect()->route('home');
     }
 
     /**
@@ -128,7 +136,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->delete();
-
-        return redirect('home');
+        Session::put('deleted','Job deleted successfully');
+        return redirect()->route('home');
     }
 }

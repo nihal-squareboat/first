@@ -22,7 +22,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/home','JobController@store')->name('job');
+Route::post('/job','JobController@store')->name('job');
+
+Route::post('/apply/{id}','CandidateController@store')->name('jobs.apply');
+
+Route::post('/cancel/{id}','CandidateController@destroy')->name('jobs.cancel');
+
+Route::post('/view/{id}','JobController@show')->name('jobs.applicants');
+
+Route::get('/sendAppliedMail/{id}','MailController@applied_mail')->name('mail.send');
 
 Route::post('/company','Auth\RegisterController@company')->name('comapnies.add');
 

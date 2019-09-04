@@ -1,5 +1,13 @@
 @extends('layouts.app')
-@include(Auth::user()->usertype)
+@if(Auth::user()->usertype == null)
+    @include('partials/user')
+@else
+    @include(Auth::user()->usertype)
+@endif
 @section('content')
-    @yield(Auth::user()->usertype)
+    @if(Auth::user()->usertype == null)
+        @yield('partials/user')
+    @else
+        @yield(Auth::user()->usertype)
+@endif
 @endsection

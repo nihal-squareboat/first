@@ -8,7 +8,8 @@
     {{-- Snackbar Start --}}
         
     <div id="snackbar"><div style="text-align:right"><button type="button" id="snackbarButton" class="close" style="color: #fff">&times;</button></div>Job Added Successfully</div>
-
+    <div id="snackbar1"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Job Deleted Successfully</div>
+    
     {{-- Snackbar End --}}
 
     {{-- Recruiter Section Start --}}
@@ -24,29 +25,32 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        You are logged in as recruiter!<br><br>
-                        <table class="auto-index table table-hover" class="auto-index">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Serial Number</th>
-                                    <th>Job Title</th>
-                                    <th>Job Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($jobs as $job)
-                                    <tr data-toggle="modal" data-target="#viewJob-{{ $job->id }}">
-                                        <td id="serial_num"></td>
-                                        <td>{{ $job->jobTitle }}</td>
-                                        <td>{{ substr($job->jobDescription , 0, 50)}} 
-                                            @if(strlen($job->jobDescription)>50)
-                                                ...
-                                            @endif
-                                        </td>
+                        @if ($jobs->isNotEmpty())
+                            <table class="auto-index table table-hover" class="auto-index">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Serial Number</th>
+                                        <th>Job Title</th>
+                                        <th>Job Description</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($jobs as $job)
+                                        <tr data-toggle="modal" data-target="#viewJob-{{ $job->id }}">
+                                            <td id="serial_num"></td>
+                                            <td>{{ $job->jobTitle }}</td>
+                                            <td>{{ substr($job->jobDescription , 0, 50)}} 
+                                                @if(strlen($job->jobDescription)>50)
+                                                    ...
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <h5>You don't have any job. Kindly add one!</h5>
+                        @endif
                         <br><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newJob">New Job</button>
                     </div>
                 </div>
@@ -103,12 +107,18 @@
                     <div class="modal-footer" id="viewFooter-{{ $job->id }}" style="display: block;">
                         <div class="form-inline" style="position: relative; margin-right:5%;">
                             <button type="button" class="btn btn-primary" onclick="edit_{{ $job->id }}()">Edit</button>
-                            <div style="margin-right:3%; margin-left:3%;">
+                            <div style="margin-left:3%;">
                                 <form method="POST" action="{{ route('jobs.delete', $job->id)}}">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </div>
+                            <div style="margin-right:3%; margin-left:3%;">
+                                    <form method="POST" action="{{ route('jobs.applicants', $job->id)}}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-info">View Applicants</button>
+                                    </form>
+                                </div>
                             <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -187,15 +197,15 @@
             document.getElementById("jobDescription").value = "";
         }
 
-        function close() {
-            document.getElementById("snackbar").className = "hide";
-
-        }
-
         $(document).ready(function(){
             $('#snackbarButton').click(function(){
                 $('#snackbar').removeClass();
-                
+            });
+        });
+
+        $(document).ready(function(){
+            $('#closeSnackbarButton').click(function(){
+                $('#snackbar1').removeClass();
             });
         });
 
@@ -220,6 +230,14 @@
             x.classList.add("show");
         </script>
         {{ Session::forget('success') }}
+    @else
+        @if(Session::has('deleted'))
+            <script>
+                var x = document.getElementById("snackbar1");
+                x.classList.add("show");
+            </script>
+            {{ Session::forget('deleted') }}
+        @endif
     @endif
 
     {{-- javaScripts End --}}
