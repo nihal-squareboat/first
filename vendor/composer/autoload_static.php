@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
+class ComposerStaticInit604d42c341b734936740712c37f75d7c
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -503,6 +503,7 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
+        'App\\Http\\Controllers\\Auth\\RegistersUsers' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegistersUsers.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\CandidateController' => __DIR__ . '/../..' . '/app/Http/Controllers/CandidateController.php',
@@ -519,11 +520,15 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Job' => __DIR__ . '/../..' . '/app/Job.php',
-        'App\\Jobapplied' => __DIR__ . '/../..' . '/app/Jobapplied.php',
+        'App\\JobApplication' => __DIR__ . '/../..' . '/app/JobApplication.php',
+        'App\\Nova\\Job' => __DIR__ . '/../..' . '/app/Nova/Job.php',
+        'App\\Nova\\Resource' => __DIR__ . '/../..' . '/app/Nova/Resource.php',
+        'App\\Nova\\User' => __DIR__ . '/../..' . '/app/Nova/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\NovaServiceProvider' => __DIR__ . '/../..' . '/app/Providers/NovaServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Usercompany' => __DIR__ . '/../..' . '/app/UserCompany.php',
@@ -4926,11 +4931,11 @@ class ComposerStaticInit179a7e1763f1de11535a4637654cfe3a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit179a7e1763f1de11535a4637654cfe3a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit179a7e1763f1de11535a4637654cfe3a::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit179a7e1763f1de11535a4637654cfe3a::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit179a7e1763f1de11535a4637654cfe3a::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit179a7e1763f1de11535a4637654cfe3a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit604d42c341b734936740712c37f75d7c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit604d42c341b734936740712c37f75d7c::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit604d42c341b734936740712c37f75d7c::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit604d42c341b734936740712c37f75d7c::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit604d42c341b734936740712c37f75d7c::$classMap;
 
         }, null, ClassLoader::class);
     }

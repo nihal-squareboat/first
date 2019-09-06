@@ -1,10 +1,12 @@
 <?php
 
-namespace Illuminate\Foundation\Auth;
+namespace App\Http\Controllers\Auth;
 
+use App\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 
 trait RegistersUsers
 {
@@ -17,7 +19,8 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        $companies = Company::all();
+            return view('auth.register' ,compact('companies'));
     }
 
     /**

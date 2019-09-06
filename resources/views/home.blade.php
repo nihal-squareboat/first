@@ -1,13 +1,9 @@
 @extends('layouts.app')
-@if(Auth::user()->usertype == null)
-    @include('partials/user')
-@else
-    @include(Auth::user()->usertype)
-@endif
-@section('content')
-    @if(Auth::user()->usertype == null)
-        @yield('partials/user')
+    @if(Auth::user()->usertype != 'admin')
+        @include(Auth::user()->usertype)
+        @section('content')
+                @yield(Auth::user()->usertype)
+        @endsection
     @else
-        @yield(Auth::user()->usertype)
-@endif
-@endsection
+    <script>window.location = "/nova/dashboards/main";</script>
+    @endif

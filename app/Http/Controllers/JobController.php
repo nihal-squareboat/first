@@ -76,10 +76,10 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $applicants = DB::table('jobapplieds')
-                ->join('users', 'users.id', '=', 'jobapplieds.candidate_id')
+        $applicants = DB::table('job_applications')
+                ->join('users', 'users.id', '=', 'job_applications.candidate_id')
                 ->select('users.name', 'users.email')
-                ->where('jobapplieds.job_id', '=', $id)
+                ->where('job_applications.job_id', '=', $id)
                 ->orderBy('users.name', 'asc' )
                 ->orderBy('users.email', 'asc')
                 ->get();

@@ -78,6 +78,7 @@ trait ResolvesReverseRelation
      */
     protected function getRelationForeignKeyName(Relation $relation)
     {
+        dd(method_exists($relation, 'getForeignKeyName'));
         return method_exists($relation, 'getForeignKeyName')
             ? $relation->getForeignKeyName()
             : $relation->getForeignKey();

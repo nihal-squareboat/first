@@ -7,7 +7,7 @@
 
     {{-- Snackbar Start --}}
             
-    <div id="snackbar"><div style="text-align:right"><button type="button" id="snackbarButton" class="close" style="color: #fff">&times;</button></div>Applied Successfully</div>
+    <div id="snackbar"><div style="text-align:right"><button type="button" id="snackbarButton" class="close " style="color: #fff">&times;</button></div>Applied Successfully</div>
     <div id="snackbar1"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Cancelled Application Successfully</div>
 
     {{-- Snackbar End --}}

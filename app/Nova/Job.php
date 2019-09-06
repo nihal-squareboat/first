@@ -2,28 +2,33 @@
 
 namespace App\Nova;
 
+
 use Laravel\Nova\Fields\ID;
+use Model;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Silvanite\NovaToolPermissions\Role;
 
-class User extends Resource
+class Job extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\\User';
+    public static $model = 'App\Job';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'Name';
+
 
     /**
      * The columns that should be searched.
@@ -31,7 +36,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id'
     ];
 
     /**
@@ -45,27 +50,14 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Name')
+            Text::make('Job Title', 'jobTitle')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Email')
+            Text::make('Job Description', 'jobDescription')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:8')
-                ->updateRules('nullable', 'string', 'min:8'),
-
-            Select::make('usertype')->options([
-                    'recruiter' => 'Recruiter',
-                    'candidate' => 'Candidate',
-                ])
-                ->sortable()
-                ->displayUsingLabels()
+                ->rules('required', 'max:400'),
+            BelongsTo::make('Recruiter', 'recruiter', 'App\Nova\User')
         ];
     }
 

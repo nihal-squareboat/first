@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobapplied;
+use App\JobApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -45,7 +45,7 @@ class CandidateController extends Controller
     public function store(Request $request, $id)
     {
 
-        $apply_job = new Jobapplied;
+        $apply_job = new JobApplication;
 
         $apply_job->candidate_id = Auth::user()->id;
         $apply_job->job_id = $id;
@@ -96,7 +96,7 @@ class CandidateController extends Controller
     public function destroy($id)
     {
         
-        $applied_job = Jobapplied::where('candidate_id', '=', Auth::user()->id)->findOrFail($id);
+        $applied_job = JobApplication::where('candidate_id', '=', Auth::user()->id)->findOrFail($id);
         $applied_job->delete();
         Session::put('cancelled','Cancelled');
         return redirect()->route('home');
