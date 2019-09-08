@@ -1,15 +1,21 @@
 @push("styles")
     <link href=" {{ asset('css/autoIncrementSerial.css') }} " rel="stylesheet">
     <link href=" {{ asset('css/snackbar.css') }} " rel="stylesheet">
+    <script src="{{ asset('js/other.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('candidate')
 
     {{-- Snackbar Start --}}
             
-    <div id="snackbar"><div style="text-align:right"><button type="button" id="snackbarButton" class="close " style="color: #fff">&times;</button></div>Applied Successfully</div>
-    <div id="snackbar1"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Cancelled Application Successfully</div>
-
+    <div id="snackbar" class="{{ Session::has('applied') ? ' show' : '' }}"><div style="text-align:right"><button type="button" id="snackbarButton" class="close " style="color: #fff">&times;</button></div>Applied Successfully</div>
+    <div id="snackbar1" class="{{ Session::has('cancelled') ? ' show' : '' }}"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Cancelled Application Successfully</div>
+    @if(Session::has('applied'))
+        {{ Session::forget('applied') }}
+    @endif
+    @if(Session::has('cancelled'))
+        {{ Session::forget('cancelled') }}
+    @endif
     {{-- Snackbar End --}}
 
     {{-- candidate Section Start --}}
@@ -158,38 +164,6 @@
         </div>
         @endforeach
         {{-- All jobs modal end --}}
-
-        <script>
-
-            $(document).ready(function(){
-                $('#snackbarButton').click(function(){
-                    $('#snackbar').removeClass();
-                });
-            });
-
-            $(document).ready(function(){
-                $('#closeSnackbarButton').click(function(){
-                    $('#snackbar1').removeClass();
-                });
-            });
-
-        </script>
-
-        @if(Session::has('applied'))
-            <script>
-                var x = document.getElementById("snackbar");
-                x.classList.add("show");
-            </script>
-            {{ Session::forget('applied') }}
-        @else
-            @if(Session::has('cancelled'))
-                <script>
-                    var x = document.getElementById("snackbar1");
-                    x.classList.add("show");
-                </script>
-                {{ Session::forget('cancelled') }}
-            @endif
-        @endif
 
     {{-- candidate Section End --}}
 @endsection

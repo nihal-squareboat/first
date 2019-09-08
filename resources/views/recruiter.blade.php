@@ -1,15 +1,23 @@
 @push("styles")
     <link href=" {{ asset('css/autoIncrementSerial.css') }} " rel="stylesheet">
     <link href=" {{ asset('css/snackbar.css') }} " rel="stylesheet">
+    <script src="{{ asset('js/other.js') }}" type="text/javascript"></script>
 @endpush
 
 @section('recruiter')
 
     {{-- Snackbar Start --}}
-        
-    <div id="snackbar"><div style="text-align:right"><button type="button" id="snackbarButton" class="close" style="color: #fff">&times;</button></div>Job Added Successfully</div>
-    <div id="snackbar1"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Job Deleted Successfully</div>
     
+
+    <div id="snackbar" class="{{ Session::has('success') ? ' show' : '' }}"><div style="text-align:right"><button type="button" id="snackbarButton" class="close " style="color: #fff">&times;</button></div>Job Added Successfully</div>
+    <div id="snackbar1" class="{{ Session::has('deleted') ? ' show' : '' }}"><div style="text-align:right"><button type="button" id="closeSnackbarButton" class="close" style="color: #fff">&times;</button></div>Job Deleted Successfully</div>
+    @if(Session::has('success'))
+        {{ Session::forget('success') }}
+    @endif
+    @if(Session::has('deleted'))
+        {{ Session::forget('deleted') }}
+    @endif
+
     {{-- Snackbar End --}}
 
     {{-- Recruiter Section Start --}}
@@ -188,59 +196,19 @@
         </div>
     </div>
     {{-- New Job Modal End --}}
-
-    {{-- javaScripts Start --}}
-
     <script>
-        function eraseText() {
-            document.getElementById("jobTitle").value = "";
-            document.getElementById("jobDescription").value = "";
-        }
-
-        $(document).ready(function(){
-            $('#snackbarButton').click(function(){
-                $('#snackbar').removeClass();
-            });
-        });
-
-        $(document).ready(function(){
-            $('#closeSnackbarButton').click(function(){
-                $('#snackbar1').removeClass();
-            });
-        });
-
     document.getElementById("body").onload = function(){
-            @if($errors->any())
-                @if(Session::has('edit'))
-                    $("#viewJob-{{ Session::get('edit') }}").modal('show');
-                    edit_{{ $job->id }}();
-                    $('#newJob').modal('hide');
-                    {{ Session::forget('edit') }}
-                @else
-                    $('#newJob').modal('show');
-                @endif
+        @if($errors->any())
+            @if(Session::has('edit'))
+                $("#viewJob-{{ Session::get('edit') }}").modal('show');
+                edit_{{ $job->id }}();
+                $('#newJob').modal('hide');
+                {{ Session::forget('edit') }}
+            @else
+                $('#newJob').modal('show');
             @endif
-    };
-
-    </script>
-    
-    @if(Session::has('success'))
-        <script>
-            var x = document.getElementById("snackbar");
-            x.classList.add("show");
-        </script>
-        {{ Session::forget('success') }}
-    @else
-        @if(Session::has('deleted'))
-            <script>
-                var x = document.getElementById("snackbar1");
-                x.classList.add("show");
-            </script>
-            {{ Session::forget('deleted') }}
         @endif
-    @endif
-
-    {{-- javaScripts End --}}
-
+    };
+    </script>
     {{-- Recruiter Section End --}}
 @endsection

@@ -57,6 +57,7 @@ class Job extends Resource
             Text::make('Job Description', 'jobDescription')
                 ->sortable()
                 ->rules('required', 'max:400'),
+                
             BelongsTo::make('Recruiter', 'recruiter', 'App\Nova\User')
         ];
     }

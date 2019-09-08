@@ -1,0 +1,12 @@
+
+.auto-index {
+	counter-reset: Serial;
+	td {
+		&:first-child {
+			&:before {
+				counter-increment: Serial;
+				content: counter(Serial);
+			}
+		}
+	}
+}
