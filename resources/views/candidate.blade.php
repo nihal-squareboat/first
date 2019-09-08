@@ -31,7 +31,7 @@
                                 </div>
                             @endif
                             <h5>Applied Jobs</h5>
-                            @if ($appliedjobs->isNotEmpty())
+                            @if ($appliedJobs->isNotEmpty())
                                 <table class="auto-index table table-hover">
                                     <thead class="thead-light">
                                         <tr>
@@ -42,7 +42,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($appliedjobs as $job)
+                                        @foreach ($appliedJobs as $job)
                                             <tr data-toggle="modal" data-target="#viewAppliedJob-{{ $job->id }}">
                                                 <td id="serial_num"></td>
                                                 <td>{{ $job->companyName }}</td>
@@ -97,7 +97,7 @@
 
         {{-- Applied job modal start --}}
 
-        @foreach ($appliedjobs as $job)
+        @foreach ($appliedJobs as $job)
         <div class="modal fade" id="viewAppliedJob-{{ $job->id }}" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

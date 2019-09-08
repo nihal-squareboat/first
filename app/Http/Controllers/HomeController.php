@@ -40,7 +40,7 @@ class HomeController extends Controller
                 ->orderBy('jobs.jobTitle', 'asc')
                 ->get();
         
-        $appliedjobs = DB::table('job_applications')
+        $appliedJobs = DB::table('job_applications')
                 ->join('jobs', 'jobs.id', '=', 'job_applications.job_id')
                 ->join('usercompanies', 'jobs.user_id', '=', 'usercompanies.user_id')
                 ->join('companies', 'companies.id', '=', 'usercompanies.company_id')
@@ -52,16 +52,11 @@ class HomeController extends Controller
 
 
         if(Auth::user()->usertype == 'candidate') {
-            return view('home' ,compact('jobs','appliedjobs'));
+            return view('home' ,compact('jobs','appliedJobs'));
         }
         else {
             $jobs = Job::where('user_id',Auth::user()->id)->orderBy('jobTitle', 'asc' )->get();
             return view('home' ,compact('jobs'));
         }
-    }
-
-    public function xyz($id)
-    {
-        dd(\App\User::find($id)->jobs()->first()->jobTitle);
     }
 }

@@ -1,25 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
-use Mail;
-use App\Http\Requests;
+namespace App\Listeners;
 
-use Illuminate\Http\Request;
+use App\Event\EventEmail;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MailController extends Controller {
+class EventEmailListner
+{
+    /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
 
-   public function applied_mail($id) {
-
-        $appliedjobs = DB::table('jobs')
+    /**
+     * Handle the event.
+     *
+     * @param  EventEmail  $event
+     * @return void
+     */
+    public function handle(EventEmail $messages)
+    {
+        $appliedJobs = DB::table('jobs')
             ->join('usercompanies', 'jobs.user_id', '=', 'usercompanies.user_id')
             ->join('companies', 'companies.id', '=', 'usercompanies.company_id')
             ->join('users','users.id', '=', 'usercompanies.user_id')
             ->select('jobs.jobTitle', 'companies.companyName', 'users.email','users.name')
-            ->where('jobs.id', '=', $id)
+            ->where('jobs.id', '=', $messages->message)
             ->first();
 
         $candidate = DB::table('users')
@@ -27,29 +43,28 @@ class MailController extends Controller {
                 ->where('id', '=', Auth::user()->id)
                 ->first();
 
-
-        $recruiterName=$appliedjobs->name;
-        $recruiterEmail=$appliedjobs->email;
+        $recruiterName=$appliedJobs->name;
+        $recruiterEmail=$appliedJobs->email;
         $name=$candidate->name;
-        $email_id=$candidate->email;
-        $jobTitle=$appliedjobs->jobTitle;
-        $companyName=$appliedjobs->companyName;
+        $emailId=$candidate->email;
+        $jobTitle=$appliedJobs->jobTitle;
+        $companyName=$appliedJobs->companyName;
         
         $data = array('name' => $name, 'title' => $jobTitle, 'companyName' => $companyName);
         
-        Mail::send('mail', $data, function($message) use ($name,$email_id) {
-                $message->to($email_id, $name)
+        Mail::send('mail', $data, function($message) use ($name,$emailId) {
+                $message->to($emailId, $name)
                 ->subject('Applied Successfully');
         });
-
-        $data = array('name' => $name, 'recruiterName' => $recruiterName, 'email' => $email_id, 'jobTitle' => $jobTitle);
+        
+        $data = array('name' => $name, 'recruiterName' => $recruiterName, 'email' => $emailId, 'jobTitle' => $jobTitle);
 
         Mail::send('recruitermail', $data, function($message) use ($recruiterName,$recruiterEmail) {
             $message->to($recruiterEmail, $recruiterName)
             ->subject('Application Recieved');
         });
-
+        
         Session::put('applied','Applied');
-        return redirect()->route('home');
-   }
+        return;
+    }
 }

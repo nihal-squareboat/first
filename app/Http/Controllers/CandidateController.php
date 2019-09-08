@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event\EventEmail;
 use App\JobApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class CandidateController extends Controller
     public function index()
     {
         //
+        
     }
 
     public function __construct()
@@ -45,12 +47,14 @@ class CandidateController extends Controller
     public function store(Request $request, $id)
     {
 
-        $apply_job = new JobApplication;
+        $applyJob = new JobApplication;
 
-        $apply_job->candidate_id = Auth::user()->id;
-        $apply_job->job_id = $id;
-        $apply_job->save();
-        return redirect()->route('mail.send', $id);
+        $applyJob->candidate_id = Auth::user()->id;
+        $applyJob->job_id = $id;
+        $applyJob->save();
+        event(new EventEmail($id));
+        return redirect()->route('home');
+                return redirect()->route('mail.send', $id);
     }
 
     /**
@@ -96,8 +100,8 @@ class CandidateController extends Controller
     public function destroy($id)
     {
         
-        $applied_job = JobApplication::where('candidate_id', '=', Auth::user()->id)->findOrFail($id);
-        $applied_job->delete();
+        $appliedJob = JobApplication::where('candidate_id', '=', Auth::user()->id)->findOrFail($id);
+        $appliedJob->delete();
         Session::put('cancelled','Cancelled');
         return redirect()->route('home');
     }
