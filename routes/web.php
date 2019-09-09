@@ -30,8 +30,6 @@ Route::post('/cancel/{id}','CandidateController@destroy')->name('jobs.cancel')->
 
 Route::post('/view/{id}','JobController@show')->name('jobs.applicants');
 
-Route::get('/sendAppliedMail/{id}','MailController@applied_mail')->name('mail.send')->middleware('verified');
-
 Route::post('/company','Auth\RegisterController@company')->name('comapnies.add');
 
 Route::post('/job/{id}','JobController@update')->name('jobs.update')->middleware('verified');
