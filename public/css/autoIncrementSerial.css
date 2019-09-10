@@ -1,9 +1,1 @@
-.auto-index {
-  counter-reset: Serial;
-}
-
-.auto-index td:first-child:before {
-  counter-increment: Serial;
-  content: counter(Serial);
-}
-
+.auto-index{counter-reset:Serial}.auto-index td:first-child:before{counter-increment:Serial;content:counter(Serial)}
