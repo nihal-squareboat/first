@@ -91,4 +91,6 @@ return [
 
     'pagination' => 'simple',
 
+    'admins' => explode(',', env('NOVA_ADMINS', 'admin@squareboat.com')),
+
 ];
