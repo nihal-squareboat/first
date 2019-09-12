@@ -44,14 +44,14 @@
                                     <tbody>
                                         @foreach ($appliedJobs as $job)
                                             <tr data-toggle="modal" data-target="#viewAppliedJob-{{ $job->id }}">
-                                                <td id="serial_num"></td>
-                                                <td>{{ $job->companyName }}</td>
-                                                <td>{{ substr($job->jobTitle , 0, 50)}} 
-                                                    @if(strlen($job->jobTitle)>50)
+                                                <td id="serial_num" style="word-break: break-all;"></td>
+                                                <td style="word-break: break-all;">{{ $job->companyName }}</td>
+                                                <td style="word-break: break-all;">{{ substr($job->jobTitle , 0, 30)}} 
+                                                    @if(strlen($job->jobTitle)>30)
                                                         ...
                                                     @endif</td>
-                                                <td>{{ substr($job->jobDescription , 0, 50)}} 
-                                                    @if(strlen($job->jobDescription)>50)
+                                                <td style="word-break: break-all;">{{ substr($job->jobDescription , 0, 30)}} 
+                                                    @if(strlen($job->jobDescription)>30)
                                                         ...
                                                     @endif
                                                 </td>
@@ -77,11 +77,12 @@
                                     <tbody>
                                         @foreach ($jobs as $job)
                                             <tr data-toggle="modal" data-target="#viewJob-{{ $job->id }}">
-                                                <td id="serial_num"></td>
-                                                <td>{{ $job->companyName }}</td>
-                                                <td>{{ $job->jobTitle }}</td>
-                                                <td>{{ substr($job->jobDescription , 0, 50)}} 
-                                                    @if(strlen($job->jobDescription)>50)
+                                                <td id="serial_num" style="word-break: break-all;"></td>
+                                                <td style="word-break: break-all;">{{ $job->companyName }}</td>
+                                                <td style="word-break: break-all;">{{ substr($job->jobTitle , 0, 30) }}
+						    @if(strlen($job->jobTitle)>30)...@endif</td>
+                                                <td style="word-break: break-all;">{{ substr($job->jobDescription , 0, 30)}} 
+                                                    @if(strlen($job->jobDescription)>30)
                                                         ...
                                                     @endif
                                                 </td>
