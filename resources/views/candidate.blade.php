@@ -46,7 +46,10 @@
                                             <tr data-toggle="modal" data-target="#viewAppliedJob-{{ $job->id }}">
                                                 <td id="serial_num"></td>
                                                 <td>{{ $job->companyName }}</td>
-                                                <td>{{ $job->jobTitle }}</td>
+                                                <td>{{ substr($job->jobTitle , 0, 50)}} 
+                                                    @if(strlen($job->jobTitle)>50)
+                                                        ...
+                                                    @endif</td>
                                                 <td>{{ substr($job->jobDescription , 0, 50)}} 
                                                     @if(strlen($job->jobDescription)>50)
                                                         ...
