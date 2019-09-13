@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@if(Auth::user()->usertype==null)
+@if(Auth::user()->usertype=='admin')
     @section('content')
     <script>window.location = "/nova";</script>
     @endsection

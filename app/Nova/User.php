@@ -61,6 +61,7 @@ class User extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             Select::make('usertype')->options([
+                    'admin' => 'Admin',
                     'recruiter' => 'Recruiter',
                     'candidate' => 'Candidate',
                 ])
