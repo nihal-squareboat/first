@@ -18,7 +18,7 @@
                             </div>
                         @endif
                         @if ($applicants->isNotEmpty())
-                            <table class="auto-index table table-hover" class="auto-index">
+                            <table class="auto-index table table-hover auto-index">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Serial Number</th>

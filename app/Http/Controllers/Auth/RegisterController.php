@@ -92,7 +92,7 @@ class RegisterController extends Controller
         if($request->hiddenValue == 'other') {
 
             $validator = Validator::make($request->all(), [
-                'companyName' => 'required|max:255',
+                'companyName' => ['required', 'string', 'max:255', 'unique:companies']
             ]);
     
             if ($validator->fails()) {
