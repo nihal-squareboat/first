@@ -15,7 +15,7 @@ class CreateCompanyTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('companyName');
+            $table->string('companyName')->unique();
             $table->timestamps();
         });
     }
