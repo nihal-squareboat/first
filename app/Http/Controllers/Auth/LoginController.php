@@ -25,13 +25,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected function redirectTo()
-{
-    if (auth()->user()->usertype == null) {
-        return '/nova';
-    }
-    return '/home';
-}
+    
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
