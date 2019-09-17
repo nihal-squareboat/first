@@ -106,7 +106,7 @@
                             <br>
                             @csrf
                             <label for="companyTitle">Company Name</label>
-                            <input type="text" name="companyName" id="companyName" class="form-control{{ $errors->has('companyName') ? ' is-invalid' : '' }}" id="companyName" placeholder="Enter Company Name">
+                            <input minlength="3"  maxlength="140" type="text" name="companyName" id="companyName" class="form-control{{ $errors->has('companyName') ? ' is-invalid' : '' }}" id="companyName" placeholder="Enter Company Name">
                             @if ($errors->has('companyName'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('companyName') }}</strong>

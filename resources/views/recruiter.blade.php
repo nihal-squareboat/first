@@ -170,7 +170,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="jobTitle">Job Title</label>
-                            <input type="text" name="jobTitle" class="form-control{{ $errors->has('jobTitle') ? ' is-invalid' : '' }}" id="jobTitle" placeholder="Job Title" autofocus reqiured>
+                            <input type="text" maxlength="191" name="jobTitle" class="form-control{{ $errors->has('jobTitle') ? ' is-invalid' : '' }}" id="jobTitle" placeholder="Job Title" autofocus reqiured>
                             @if ($errors->has('jobTitle'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('jobTitle') }}</strong>
