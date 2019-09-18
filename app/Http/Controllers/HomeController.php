@@ -38,7 +38,7 @@ class HomeController extends Controller
                 ->whereNotIn('jobs.id', $applied)
                 ->orderBy('companies.companyName', 'asc' )
                 ->orderBy('jobs.jobTitle', 'asc')
-                ->get();
+                ->paginate(15);
         
         $appliedJobs = DB::table('job_applications')
                 ->join('jobs', 'jobs.id', '=', 'job_applications.job_id')
@@ -48,14 +48,14 @@ class HomeController extends Controller
                 ->where('job_applications.candidate_id', '=', Auth::user()->id)
                 ->orderBy('companies.companyName', 'asc' )
                 ->orderBy('jobs.jobTitle', 'asc')
-                ->get();
+                ->paginate(15);
 
 
         if(Auth::user()->usertype == 'candidate') {
             return view('home' ,compact('jobs','appliedJobs'));
         }
         else {
-            $jobs = Job::where('user_id',Auth::user()->id)->orderBy('jobTitle', 'asc' )->get();
+            $jobs = Job::where('user_id',Auth::user()->id)->orderBy('jobTitle', 'asc' )->paginate(15);
             return view('home' ,compact('jobs'));
         }
     }

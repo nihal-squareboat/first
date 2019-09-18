@@ -57,6 +57,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        {{ $appliedJobs->links() }}
                                     </tbody>
                                 </table>
                             @else
@@ -90,6 +91,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{ $jobs->links() }}
                             @else
                                 <h5><em>No jobs available!</em></h5><br>
                             @endif
@@ -131,6 +133,7 @@
             </div>
         </div>
         @endforeach
+        
 
         {{-- Applied job modal end --}}
 
@@ -167,6 +170,7 @@
             </div>
         </div>
         @endforeach
+        
         {{-- All jobs modal end --}}
 
     {{-- candidate Section End --}}

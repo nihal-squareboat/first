@@ -54,8 +54,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    
                                 </tbody>
                             </table>
+                            {{ $jobs->links() }}
                         @else
                             <h5>You don't have any job. Kindly add one!</h5>
                         @endif
