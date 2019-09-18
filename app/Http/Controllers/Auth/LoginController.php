@@ -26,12 +26,14 @@ class LoginController extends Controller
      * @var string
      */
     protected function redirectTo()
-{
-    if (auth()->user()->usertype == 'admin') {
+    {
+        
+        if (auth()->user()->usertype !== 'admin') {
+            return '/home';
+        }
         return '/nova';
+        
     }
-    return '/home';
-}
 
     /**
      * Create a new controller instance.

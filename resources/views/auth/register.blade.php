@@ -188,7 +188,11 @@
             document.getElementById("jobId").value="{{session()->get('recruiter')}}";
             $('#userTy').modal('hide');
         @else
+<<<<<<< HEAD
             document.getElementById("userType").value="candidate";
+=======
+        document.getElementById("userType").value="candidate";
+>>>>>>> 2b2a0015e6cf50e8d22444a3728408942c93505c
             @if($errors->any())
                 @if ($errors->has('companyName'))
                     $('#company').modal('show');

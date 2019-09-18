@@ -82,7 +82,7 @@ class JobController extends Controller
                 ->where('job_applications.job_id', '=', $id)
                 ->orderBy('users.name', 'asc' )
                 ->orderBy('users.email', 'asc')
-                ->get();
+                ->paginate(15);
             return view('applicants' ,compact('applicants'));
     }
 
