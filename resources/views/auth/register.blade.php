@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" autocomplete="anyrandomstring" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" autocomplete="off" value="" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -188,11 +188,7 @@
             document.getElementById("jobId").value="{{session()->get('recruiter')}}";
             $('#userTy').modal('hide');
         @else
-<<<<<<< HEAD
-            document.getElementById("userType").value="candidate";
-=======
         document.getElementById("userType").value="candidate";
->>>>>>> 2b2a0015e6cf50e8d22444a3728408942c93505c
             @if($errors->any())
                 @if ($errors->has('companyName'))
                     $('#company').modal('show');
