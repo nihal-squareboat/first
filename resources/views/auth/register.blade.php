@@ -188,6 +188,7 @@
             document.getElementById("jobId").value="{{session()->get('recruiter')}}";
             $('#userTy').modal('hide');
         @else
+            document.getElementById("userType").value="candidate";
             @if($errors->any())
                 @if ($errors->has('companyName'))
                     $('#company').modal('show');
