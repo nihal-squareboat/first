@@ -184,11 +184,11 @@
 <script type="text/javascript">
     document.getElementById("body").onload = function(){
         @if(session()->has('recruiter'))
+            {{ session()->reflash() }}
             document.getElementById("userType").value="recruiter";
             document.getElementById("jobId").value="{{session()->get('recruiter')}}";
             $('#userTy').modal('hide');
         @else
-        document.getElementById("userType").value="candidate";
             @if($errors->any())
                 @if ($errors->has('companyName'))
                     $('#company').modal('show');

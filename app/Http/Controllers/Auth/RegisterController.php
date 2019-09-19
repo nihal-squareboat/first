@@ -66,23 +66,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'usertype' => $data['userType'],
-            
         ]);
+
         if($data['jobId']!='-1') {
             $company = Company::findOrFail($data['jobId']);
-        
             $usercompany = UserCompany::create([
             'user_id' => $user->id,
             'company_id' => $company->id,
             ]);
         }
-
         return $user;
     }
 
@@ -103,10 +100,12 @@ class RegisterController extends Controller
 
             $company->companyName = $request->companyName;
             $company->save();
-            return redirect('register')->with('recruiter', $company->id);
+            $request->session()->flash('recruiter', $company->id);
+            return redirect('register');
         }
         else {
-            return redirect('register')->with('recruiter', $request->companyId);
+            $request->session()->flash('recruiter', $request->companyId);
+            return redirect('register');
         }
 
         
