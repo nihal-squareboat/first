@@ -36,6 +36,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $applicants->links() }}
                         @else
                             <h5>No applicants has applied to this job.</h5>
                         @endif
