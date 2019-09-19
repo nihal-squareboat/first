@@ -39,6 +39,8 @@ class Handler extends ExceptionHandler
     parent::report($exception);
 }
 
+
+
     /**
      * Render an exception into an HTTP response.
      *
@@ -48,6 +50,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        $this->container->singleton(AppPolicy::class, function ($app) {
+            return new AppPolicy();
+        });
+        app(AppPolicy::class)->addDirective(Directive::SCRIPT, Keyword::UNSAFE_INLINE);
+        app(AppPolicy::class)->addDirective(Directive::STYLE, Keyword::UNSAFE_INLINE);
         return parent::render($request, $exception);
     }
 }
