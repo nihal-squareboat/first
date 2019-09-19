@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/job','JobController@store')->name('job')->middleware('verified');;
